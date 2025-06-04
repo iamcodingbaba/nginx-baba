@@ -40,3 +40,9 @@ pipeline {
     post {
         failure {
             echo 'Deployment failed. Please check the logs.'
+        }
+        success {
+            echo 'Deployment completed successfully!'
+        }
+    }
+}
