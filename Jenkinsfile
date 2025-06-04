@@ -17,7 +17,11 @@ pipeline {
         stage('Prepare Playbook') {
             steps {
                 echo "Copying content to ${PLAYBOOK_FILE}..."
-                sh 'cp azure-nginx ${PLAYBOOK_FILE}'
+                sh '''
+		echo "Updating ${PLAYBOOK_FILE} with changes from azure-nginx..."
+		grep -Fxv -f ${PLAYBOOK_FILE} azure-nginx >> ${PLAYBOOK_FILE}
+		'''
+
             }
         }
 
