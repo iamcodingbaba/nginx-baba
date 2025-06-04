@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PLAYBOOK_FILE = "/home/ubuntu/ansible/playbook_bansible_nginx.yaml"
+        PLAYBOOK_FILE = "/var/lib/jenkins/workspace/MyGitHubPipeline/playbook_bansible_nginx.yaml"
         INVENTORY_FILE = "/home/ubuntu/ansible/inventory_azure.yaml"
     }
 
