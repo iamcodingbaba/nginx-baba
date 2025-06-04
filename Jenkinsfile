@@ -12,6 +12,7 @@ pipeline {
                 echo "Downloading azure-nginx file directly to ${PLAYBOOK_FILE}..."
                 sh """
                     curl -sSL -H "Cache-Control: no-cache" -o /home/ubuntu/ansible/aws.yaml https://raw.githubusercontent.com/iamcodingbaba/nginx-baba/main/azure-nginx
+                    curl -s https://api.github.com/repos/iamcodingbaba/nginx-baba/commits/main | grep sha
                 """
             }
         }
