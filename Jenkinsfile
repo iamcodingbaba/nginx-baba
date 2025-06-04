@@ -27,7 +27,9 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 echo "Executing Ansible playbook..."
-                sh "sudo ansible-playbook -i ${INVENTORY_FILE} ${PLAYBOOK_FILE}"
+                sh """
+                echo 'your_sudo_password' | sudo -S ansible-playbook -i /home/ubuntu/ansible/inventory_azure.yaml /home/ubuntu/ansible/playbook_bansible_nginx.yaml
+                """
             }
         }
     }
