@@ -1,4 +1,4 @@
-pipeline {
+  pipeline {
     agent any
 
     environment {
@@ -26,15 +26,6 @@ pipeline {
             }
         }
 
-        stage('Restart NGINX') {
-            steps {
-                echo "Restarting NGINX service..."
-                sh """
-                    sudo /bin/systemctl restart nginx
-                    echo "NGINX restarted."
-                """
-            }
-        }
     }
 
     post {
