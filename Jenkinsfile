@@ -7,28 +7,21 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Download Playbook') {
             steps {
-                echo "Cloning GitHub repository..."
-                git branch: 'main', url: 'https://github.com/iamcodingbaba/nginx-baba.git'
+                echo "Downloading azure-nginx file directly to ${PLAYBOOK_FILE}..."
+                sh """
+                    curl -o ${PLAYBOOK_FILE} https://raw.githubusercontent.com/iamcodingbaba/nginx-baba/main/azure-nginx
+                """
             }
         }
-
-    stage('Overwrite Playbook with azure-nginx') {
-        steps {
-            echo "Overwriting ${PLAYBOOK_FILE} with content from azure-nginx..."
-            sh '''
-                sudo cp azure-nginx "${PLAYBOOK_FILE}"
-            '''
-        }
-    }
-
 
         stage('Run Ansible Playbook') {
             steps {
                 echo "Executing Ansible playbook..."
                 sh """
-                echo 'your_sudo_password' | sudo -S ansible-playbook -i /home/ubuntu/ansible/inventory_azure.yaml /home/ubuntu/ansible/playbook_bansible_nginx.yaml
+                    # Assuming Jenkins user can run sudo without password for ansible-playbook or you configure sudoers accordingly
+                    sudo ansible-playbook -i ${INVENTORY_FILE} ${PLAYBOOK_FILE}
                 """
             }
         }
