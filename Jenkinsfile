@@ -17,12 +17,12 @@ pipeline {
         stage('Update Playbook on System') {
             steps {
                 echo "Updating ${PLAYBOOK_FILE} with content from azure-nginx..."
-                sh """
+                sh '''
                     if [ -f "${PLAYBOOK_FILE}" ]; then
                         echo "Existing playbook found. Merging updates..."
                         grep -Fxv -f "${PLAYBOOK_FILE}" azure-nginx > /tmp/temp_diff || true
                         if [ -s /tmp/temp_diff ]; then
-                            sudo bash -c 'cat /tmp/temp_diff >> "${PLAYBOOK_FILE}"'
+                            cat /tmp/temp_diff >> "${PLAYBOOK_FILE}"
                             echo "New content appended to ${PLAYBOOK_FILE}."
                         else
                             echo "No new content to add to the playbook."
@@ -30,9 +30,9 @@ pipeline {
                         rm -f /tmp/temp_diff
                     else
                         echo "No existing playbook. Creating new one..."
-                        sudo cp azure-nginx "${PLAYBOOK_FILE}"
+                        cp azure-nginx "${PLAYBOOK_FILE}"
                     fi
-                """
+                '''
             }
         }
 
