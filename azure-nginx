@@ -16,10 +16,10 @@
         content: |
           <html>
           <head>
-              <title>Welcome to AZURE TEST 1</title>
+              <title>Welcome to AWS 007!</title>
           </head>
           <body>
-              <h1>Welcome to AZURE TEST 1</h1>
+              <h1>Welcome to AWS 001!</h1>
               <p>This page was deployed using Ansible.</p>
           </body>
           </html>
