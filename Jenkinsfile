@@ -14,27 +14,15 @@ pipeline {
             }
         }
 
-        stage('Update Playbook on System') {
-            steps {
-                echo "Updating ${PLAYBOOK_FILE} with content from azure-nginx..."
-                sh '''
-                    if [ -f "${PLAYBOOK_FILE}" ]; then
-                        echo "Existing playbook found. Merging updates..."
-                        grep -Fxv -f "${PLAYBOOK_FILE}" azure-nginx > /tmp/temp_diff || true
-                        if [ -s /tmp/temp_diff ]; then
-                            sudo tee -a "${PLAYBOOK_FILE}" < /tmp/temp_diff > /dev/null
-                            echo "New content appended to ${PLAYBOOK_FILE}."
-                        else
-                            echo "No new content to add to the playbook."
-                        fi
-                        rm -f /tmp/temp_diff
-                    else
-                        echo "No existing playbook. Creating new one..."
-                        sudo cp azure-nginx "${PLAYBOOK_FILE}"
-                    fi
-                '''
-            }
+    stage('Overwrite Playbook with azure-nginx') {
+        steps {
+            echo "Overwriting ${PLAYBOOK_FILE} with content from azure-nginx..."
+            sh '''
+                sudo cp azure-nginx "${PLAYBOOK_FILE}"
+            '''
         }
+    }
+
 
         stage('Run Ansible Playbook') {
             steps {
