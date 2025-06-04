@@ -1,0 +1,35 @@
+---
+- name: Change Nginx welcome page on Ubuntu to say "Welcome to AWS"
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Ensure nginx is installed
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Replace Nginx default welcome page with custom content
+      copy:
+        dest: /var/www/html/index.nginx-debian.html
+        content: |
+          <html>
+          <head>
+              <title>Welcome to AZURE</title>
+          </head>
+          <body>
+              <h1>Welcome to AZURE</h1>
+              <p>This page was deployed using Ansible.</p>
+          </body>
+          </html>
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      notify: Restart nginx
+
+  handlers:
+    - name: Restart nginx
+      service:
+        name: nginx
+        state: restarted
