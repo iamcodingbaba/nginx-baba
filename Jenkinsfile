@@ -24,8 +24,7 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 echo "Executing Ansible playbook..."
-		sh "cd ansible"
-                sh "ansible-playbook -i ${INVENTORY_FILE} ${PLAYBOOK_FILE}"
+		sh "ansible-playbook -i ${INVENTORY_FILE} ${PLAYBOOK_FILE}"
             }
         }
     }
