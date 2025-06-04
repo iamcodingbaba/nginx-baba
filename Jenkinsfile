@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PLAYBOOK_FILE = "/home/ubuntu/ansible/playbook.yaml"
+        PLAYBOOK_FILE = "/home/ubuntu/ansible/aws.yaml"
         INVENTORY_FILE = "/home/ubuntu/ansible/dynamic_aws_ec2.yaml"
     }
 
@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo "Downloading azure-nginx file directly to ${PLAYBOOK_FILE}..."
                 sh """
-                    curl -o ${PLAYBOOK_FILE} https://raw.githubusercontent.com/iamcodingbaba/nginx-baba/main/azure-nginx
+                    curl -o /home/ubuntu/ansible/aws.yaml https://raw.githubusercontent.com/iamcodingbaba/nginx-baba/main/azure-nginx
                 """
             }
         }
