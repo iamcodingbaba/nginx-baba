@@ -19,7 +19,7 @@
               <title>Welcome to AWS 007!</title>
           </head>
           <body>
-              <h1>Welcome to AWS 001!</h1>
+              <h1>Welcome to AWS 007!</h1>
               <p>This page was deployed using Ansible.</p>
           </body>
           </html>
