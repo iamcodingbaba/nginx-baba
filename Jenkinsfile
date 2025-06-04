@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        PLAYBOOK_FILE = "/var/lib/jenkins/workspace/MyGitHubPipeline/playbook_bansible_nginx.yaml"
-        INVENTORY_FILE = "/home/ubuntu/ansible/inventory_azure.yaml"
+        PLAYBOOK_FILE = "/home/ubuntu/ansible/playbook.yaml"
+        INVENTORY_FILE = "/home/ubuntu/ansible/dynamic_aws_ec2.yaml"
     }
 
     stages {
